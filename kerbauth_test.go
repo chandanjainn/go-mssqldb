@@ -8,13 +8,13 @@ import (
 	"reflect"
 	"testing"
 
-	"gopkg.in/jcmturner/gokrb5.v7/client"
-	"gopkg.in/jcmturner/gokrb5.v7/config"
-	"gopkg.in/jcmturner/gokrb5.v7/credentials"
-	"gopkg.in/jcmturner/gokrb5.v7/keytab"
-	"gopkg.in/jcmturner/gokrb5.v7/messages"
-	"gopkg.in/jcmturner/gokrb5.v7/spnego"
-	"gopkg.in/jcmturner/gokrb5.v7/types"
+	"github.com/jcmturner/gokrb5/v8/client"
+	"github.com/jcmturner/gokrb5/v8/config"
+	"github.com/jcmturner/gokrb5/v8/credentials"
+	"github.com/jcmturner/gokrb5/v8/keytab"
+	"github.com/jcmturner/gokrb5/v8/messages"
+	"github.com/jcmturner/gokrb5/v8/spnego"
+	"github.com/jcmturner/gokrb5/v8/types"
 )
 
 func createKrbFile(filename string, t *testing.T) string {
@@ -282,7 +282,7 @@ func TestFree(t *testing.T) {
 	keytabFile := createKrbFile("admin.keytab", t)
 	kt := &keytab.Keytab{}
 	c := &config.Config{}
-	cl := client.NewClientWithKeytab("Administrator", "DOMAIN.COM", kt, c, client.DisablePAFXFAST(true))
+	cl := client.NewWithKeytab("Administrator", "DOMAIN.COM", kt, c, client.DisablePAFXFAST(true))
 	var krbObj auth = &krb5Auth{username: "",
 		realm:             "domain.com",
 		serverSPN:         "MSSQLSvc/mssql.domain.com:1433",

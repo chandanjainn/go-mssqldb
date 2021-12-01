@@ -7,13 +7,13 @@ import (
 	"strconv"
 	"strings"
 
-	"gopkg.in/jcmturner/gokrb5.v7/client"
-	"gopkg.in/jcmturner/gokrb5.v7/config"
-	"gopkg.in/jcmturner/gokrb5.v7/credentials"
-	"gopkg.in/jcmturner/gokrb5.v7/keytab"
-	"gopkg.in/jcmturner/gokrb5.v7/messages"
-	"gopkg.in/jcmturner/gokrb5.v7/spnego"
-	"gopkg.in/jcmturner/gokrb5.v7/types"
+	"github.com/jcmturner/gokrb5/v8/client"
+	"github.com/jcmturner/gokrb5/v8/config"
+	"github.com/jcmturner/gokrb5/v8/credentials"
+	"github.com/jcmturner/gokrb5/v8/keytab"
+	"github.com/jcmturner/gokrb5/v8/messages"
+	"github.com/jcmturner/gokrb5/v8/spnego"
+	"github.com/jcmturner/gokrb5/v8/types"
 )
 
 type krb5Auth struct {
@@ -29,9 +29,9 @@ type krb5Auth struct {
 	state             krb5ClientState
 }
 
-var clientWithKeytab = client.NewClientWithKeytab
+var clientWithKeytab = client.NewWithKeytab
 var loadCCache = credentials.LoadCCache
-var clientFromCCache = client.NewClientFromCCache
+var clientFromCCache = client.NewFromCCache
 var spnegoNewNegToken = spnego.NewNegTokenInitKRB5
 var spnegoToken spnego.SPNEGOToken
 var spnegoUnmarshal = spnegoToken.Unmarshal
@@ -108,7 +108,7 @@ func (auth *krb5Auth) InitialBytes() ([]byte, error) {
 	if err != nil {
 		return []byte{}, err
 	}
-	c, err := config.NewConfigFromReader(krb5CnfFile)
+	c, err := config.NewFromReader(krb5CnfFile)
 	if err != nil {
 		return []byte{}, err
 	}
